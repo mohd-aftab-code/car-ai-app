@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { CarRecommendation, RecommendationRequest } from '../types/car';
 
-const API_BASE_URL = 'http://localhost:5000/api';
+// Use relative URL for Next.js API routes
+const API_BASE_URL = '/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
