@@ -53,7 +53,7 @@ export async function POST(req: Request) {
     );
 
     const content = response.data.choices[0].message.content;
-    const jsonMatch = content.match(/\[.*\]/s);
+    const jsonMatch = content.match(/\[[\s\S]*\]/);
     const recommendations = jsonMatch ? JSON.parse(jsonMatch[0]) : JSON.parse(content);
 
     return NextResponse.json(recommendations);
