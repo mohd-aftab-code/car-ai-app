@@ -4,9 +4,17 @@ import axios from 'axios';
 export async function POST(req: Request) {
   try {
     const { budget, type, usage, preferences } = await req.json();
+    const groqApiKey = process.env.GROQ_API_KEY;
 
     if (!budget || !type) {
       return NextResponse.json({ message: 'Budget and car type are required.' }, { status: 400 });
+    }
+
+    if (!groqApiKey) {
+      return NextResponse.json(
+        { message: 'Missing GROQ_API_KEY environment variable.' },
+        { status: 500 }
+      );
     }
 
     const prompt = `You are an expert car recommendation AI. 
@@ -46,7 +54,7 @@ export async function POST(req: Request) {
       },
       {
         headers: {
-          'Authorization': `Bearer ${process.env.GROK_API_KEY}`,
+          'Authorization': `Bearer ${groqApiKey}`,
           'Content-Type': 'application/json'
         }
       }
