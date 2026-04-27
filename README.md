@@ -9,22 +9,29 @@ This project is a full-stack, AI-native web application designed to help car buy
 - A Groq API Key (Place it in `server/.env`)
 
 ### 2. Setup & Run
-Run these commands in separate terminals:
+Run these commands in your terminal:
 
-**Backend:**
-```bash
-cd server
-npm install
-npm run dev
-```
-
-**Frontend:**
+**One-Command Local Setup:**
 ```bash
 cd client
 npm install
 npm run dev
 ```
-The app will be available at `http://localhost:3000` (or `3001`).
+The app will be available at `http://localhost:3000`.
+
+---
+
+## ☁️ Deployment (Netlify/Vercel)
+
+I have migrated the backend logic into **Next.js API Routes** (`/api/cars/recommend`). This allows you to deploy the entire app to Netlify in one click without needing a separate server.
+
+### Steps for Netlify:
+1.  **Build Settings**:
+    *   Base directory: `client`
+    *   Build command: `npm run build`
+    *   Publish directory: `.next`
+2.  **Environment Variables**:
+    *   Add `GROK_API_KEY` in the Netlify Dashboard (Site settings > Environment variables).
 
 ---
 
