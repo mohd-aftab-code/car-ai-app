@@ -1,0 +1,11 @@
+{
+  "name": "car-ai-app-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install": "npm install --prefix client",
+    "build": "npm run build --prefix client",
+    "start": "npm start --prefix client",
+    "dev": "npm run dev --prefix client"
+  }
+}
