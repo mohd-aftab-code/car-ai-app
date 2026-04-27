@@ -1,87 +1,55 @@
-# Car AI Recommendation System - CarDekho Assignment
+# CarDekho Assignment: AI Car Recommender
 
-This project is a full-stack, AI-native web application designed to help car buyers move from confusion to a confident shortlist of vehicles.
+Hey! This is my submission for the CarDekho assignment. I built a full-stack web app that takes the guesswork out of car buying. Instead of overwhelming users with a massive list of cars, it uses AI to take their budget, preferences, and usage, and returns exactly 3 highly-tailored options.
 
-## 🚀 Quick Start (Under 2 Minutes)
+## How to run it locally
 
-### 1. Prerequisites
-- Node.js (v18+)
-- A Groq API Key (Place it in `server/.env`)
+You'll need Node.js installed and a Groq API key.
 
-### 2. Setup & Run
-Run these commands in your terminal:
+1. Go into the `client` folder: 
+   ```bash
+   cd client
+   ```
+2. Install the dependencies:
+   ```bash
+   npm install
+   ```
+3. Create a `.env.local` file inside the `client` directory and add your API key:
+   ```env
+   GROQ_API_KEY=your_key_here
+   ```
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-**One-Command Local Setup:**
-```bash
-cd client
-npm install
-npm run dev
-```
-The app will be available at `http://localhost:3000`.
+The app will be running at `http://localhost:3000`.
 
----
+## Tech Stack
 
-## ☁️ Deployment (Netlify/Vercel)
+- **Frontend:** Next.js (App Router), React, Tailwind CSS, Framer Motion
+- **Backend:** Next.js API Routes (Serverless)
+- **AI Integration:** Groq API (using the LLaMA 3.3 model for super fast responses)
+- **State/Storage:** React State & LocalStorage for saving favorites
 
-I have migrated the backend logic into **Next.js API Routes** (`/api/cars/recommend`). This allows you to deploy the entire app to Netlify in one click without needing a separate server.
+I chose Next.js because it let me build both the frontend UI and the backend API in one cohesive codebase, which made deploying to Netlify super easy. Tailwind and Framer Motion helped me put together a polished, premium-looking UI quickly.
 
-### Steps for Netlify:
-1.  **Build Settings**:
-    *   Base directory: `client`
-    *   Build command: `npm run build`
-    *   Publish directory: `.next`
-2.  **Environment Variables**:
-    *   Add `GROK_API_KEY` in the Netlify Dashboard (Site settings > Environment variables).
+## Core Features
 
----
+- **Smart Search:** It doesn't just filter by price. It actually understands natural language inputs like "daily commute with family" or "needs a sunroof and good mileage".
+- **Comparison Tool:** You can pick two cars from the results and compare their specs side-by-side in a modal.
+- **Favorites:** You can save cars to your favorites list. This is saved in your browser's LocalStorage, so your shortlist stays there even if you refresh the page.
 
-## 🛠 Tech Stack & Rationale
-- **Frontend**: Next.js (React), Tailwind CSS, Framer Motion.
-  - *Why*: Next.js provides the fastest path to a production-ready React app. Tailwind allowed for "premium" styling in minutes. Framer Motion was used for high-end micro-animations to give it a "polished" feel.
-- **Backend**: Node.js, Express.
-  - *Why*: Simple, fast to scaffold, and excellent for handling AI streaming or JSON responses.
-- **AI Engine**: Groq API (Llama 3.3-70b-versatile).
-  - *Why*: Groq is the fastest inference engine available, making the recommendation experience feel instantaneous.
-- **Persistence**: LocalStorage.
-  - *Why*: Within a 2-3 hour window, LocalStorage provides immediate state persistence for "Favorites" without the overhead of setting up a database (PostgreSQL/MongoDB).
+## Trade-offs & Decisions
 
----
+Given the time constraints, I had to make a few deliberate cuts to focus on the core user experience:
+- **No User Auth:** I skipped building a login/signup system since it wasn't strictly necessary for the core MVP and would have taken up too much time.
+- **Placeholder Images:** Managing API keys and rate limits for real car images (like Unsplash or Google Custom Search) can be tricky, so I set up a dynamic placeholder system that pulls relevant images based on the car's name.
+- **Simplified Backend:** Initially, I had a separate Express server, but I moved the logic into Next.js API routes to make hosting much simpler.
 
-## 🧠 AI Delegation vs. Manual Effort
-- **AI Delegation**:
-  - Scaffolding components and CSS.
-  - Generating complex regex for parsing AI responses.
-  - Drafting the initial prompt for the recommendation logic.
-- **Manual Effort**:
-  - **Architecture Design**: Deciding on the controller/route pattern for the backend.
-  - **Debugging**: Recovering from model deprecation errors and image loading issues.
-  - **Fine-tuning**: Manually adjusting the AI prompt to ensure structured JSON output for technical specs.
-- **Where AI helped most**: It allowed me to "ship" a premium-looking UI in under 30 minutes.
-- **Where AI got in the way**: It initially suggested a decommissioned model name (`grok-beta`), requiring manual research to find the current active models in 2026.
+## If I had more time...
 
----
-
-## 🎯 Product Decisions
-### What was built?
-I built a **"Confidence Engine"**. Instead of a massive list of cars, it gives you exactly 3 highly-tailored options. It includes:
-1. **Intelligent Search**: Beyond just budget, it looks at usage and personal preferences.
-2. **Side-by-Side Comparison**: Directly compare the technical specs of your top 2 choices.
-3. **Favorites Persistence**: Keep a shortlist that stays with you.
-
-### What was deliberately cut?
-1. **User Auth**: Not necessary for an MVP; adds too much ceremony for a 2-hour window.
-2. **Real Image API**: I used a dynamic placeholder system to avoid the time-sink of API key management for Unsplash/Google Search.
-3. **Admin Dashboard**: Focused purely on the buyer's journey.
-
----
-
-## ⏳ If I had 4 more hours...
-1. **Real Image API Integration**: Integrate with a dedicated automotive image API for 100% accurate photos.
-2. **Cost of Ownership Calculator**: Add a feature that estimates insurance, maintenance, and fuel costs over 5 years.
-3. **Interactive 3D Views**: Use Three.js to show 364° views of the recommended cars.
-4. **Backend Persistence**: Migrate LocalStorage to a Supabase/PostgreSQL backend for multi-device sync.
-
----
-
-## 📹 Screen Recording
-The entire build process was recorded using the **Antigravity AI IDE Recording System**. The WebP session videos are stored in the platform's artifacts directory as part of this conversation.
+If I were to keep working on this, here's what I'd build next:
+1. **Real Image API:** Hooking up a dedicated automotive API to pull the exact, high-quality photos of the recommended cars.
+2. **Cost Calculator:** A tool to estimate the 5-year cost of ownership (insurance, fuel, maintenance).
+3. **Real Database:** Moving the favorites system from LocalStorage to a proper database like PostgreSQL/Supabase so users can access their saved cars across different devices.
